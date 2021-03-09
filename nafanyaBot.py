@@ -5,7 +5,7 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 
 # token = os.environ.get('BOT_TOKEN')
-token = '1667388250:AAGOt-k0SSuGhHkIBaBIE4J62wg1G4bXsWo'
+
 bot = telebot.TeleBot(str(token))
 
 
@@ -15,8 +15,6 @@ def boss(call):
                                          '45182499-3866-4dac-818d-a62c9d35114c?t=1604668843046')
     bot.send_message(call.message.chat.id, "Вот ссылка на сайт. На всякий случай! \n "
                                            "https://www.pochta.ru/management/skatin-alexey")
-
-
 
 
 @bot.message_handler(commands=['start', 'help'])
