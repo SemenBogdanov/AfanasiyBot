@@ -1,11 +1,11 @@
 import os
 import requests
+import random
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-
 # token = os.environ.get('BOT_TOKEN')
-
+token = '1667388250:AAGOt-k0SSuGhHkIBaBIE4J62wg1G4bXsWo'
 bot = telebot.TeleBot(str(token))
 
 
@@ -21,8 +21,7 @@ def boss(call):
 def send_welcome(message):
     # Приветственное сообщение!
     bot.send_message(message.chat.id, "Привет! "
-                                      "Я бот Афанасий! Могу тебе помочь решить все проблемы! "
-                                      "На всякий случай расскажу что я умею: ", reply_markup=welcome_func())
+                                      "Я бот Афанасий! Могу тебе помочь решить все проблемы! Спроси меня что я умею!")
 
 
 def welcome_func():
@@ -54,7 +53,27 @@ def callback_query(call):
 
 @bot.message_handler(content_types=['text'])
 def function_name(message):
-    bot.send_message(message.chat.id, "Вот что я могу!", reply_markup=welcome_func())
+    q_greetings = ['ривет', 'еллоу', 'обрый день', 'авствуй']
+    greetings_ans = ['Привет! Как жизнь молодая?', 'Чего надо?', 'Забей! Давай ближе к делу...', 'Я сплю вообще-то...',
+                     'Добрый день!', 'Хеллоу :)']
+    end_talk = ['Пока не знаю, как на это ответить (:', 'Прикинь, я макароны умею варить. Будешь со мной макароны?',
+                'Нам есть о чем побеседовать.','Прикольно. Но непонятно.','Как-то это странно прозвучало...']
+    q_anketa = ['оглас', 'анкет']
+    if sum([1 for _ in q_greetings if _ in message.text]) >= 1:
+        r = random.randint(0, len(greetings_ans)-1)
+        bot.send_message(message.chat.id, greetings_ans[r])
+    elif sum([1 for _ in q_anketa if _ in message.text]) >= 2:
+        bot.send_message(message.chat.id, "Вопрос по согласованию анкеты. "
+                                          "На самом деле анкета либо есть, либо нет.")
+    elif sum([1 for _ in ['Что ты можешь', 'Что ты умеешь', '_!'] if _ in message.text]) == 1:
+        bot.send_message(message.chat.id, "На всякий случай расскажу что я умею: ", reply_markup=welcome_func())
+    else:
+        r = random.randint(0, len(end_talk)-1)
+        bot.send_message(message.chat.id, end_talk[r])
+
+
+
+# bot.send_message(message.chat.id, message.text)
 
 
 print("бот запущен!")
