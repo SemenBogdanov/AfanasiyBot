@@ -5,6 +5,7 @@ import random
 import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
+
 token = os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(str(token))
 
