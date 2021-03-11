@@ -5,7 +5,7 @@ import telebot
 from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 # token = os.environ.get('BOT_TOKEN')
-token = '1667388250:AAGOt-k0SSuGhHkIBaBIE4J62wg1G4bXsWo'
+
 bot = telebot.TeleBot(str(token))
 
 
