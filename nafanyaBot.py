@@ -9,6 +9,18 @@ from telebot.types import InlineKeyboardMarkup, InlineKeyboardButton
 token = os.environ.get('BOT_TOKEN')
 bot = telebot.TeleBot(str(token))
 
+fileid_of_anketa = 'BQACAgIAAxkBAAIDv2BLfCaHUVLcmRgdsQ3mZwLnXVxzAAI3DwACy2xYSsf8UUfEm8feHgQ'
+fileid_of_preza = 'BQACAgIAAxkBAAIDyWBLf1rT6_rxHi0aWZU-JaqMd-uCAAJIDwACy2xYSnvirXKwBQebHgQ'
+
+
+# @bot.message_handler(content_types=['document'])
+# def handle_documents(message):
+#     document_id = message.document.file_id
+#     file_info = bot.get_file(document_id)
+#     print(file_info)
+#     print(f'http://api.telegram.org/file/bot{token}/{file_info.file_path}')
+#     bot.send_message(message.chat.id, document_id)  # Отправляем пользователю file_id
+
 
 def boss(call):
     bot.send_message(call.message.chat.id, "Скатин Алексей Владимирович")
@@ -22,7 +34,20 @@ def boss(call):
 def send_welcome(message):
     # Приветственное сообщение!
     bot.send_message(message.chat.id, "Привет! "
-                                      "Я бот Афанасий! Могу помочь ответить на следующие вопросы:", reply_markup=welcome_func())
+                                       "Я бот Афанасий! Могу помочь ответить на следующие вопросы:", reply_markup=welcome_func())
+
+
+@bot.message_handler(commands=['anketa'])
+def send_anketa(message):
+    fileid_of_anketa = 'BQACAgIAAxkBAAIDv2BLfCaHUVLcmRgdsQ3mZwLnXVxzAAI3DwACy2xYSsf8UUfEm8feHgQ'
+    bot.send_document(message.chat.id, fileid_of_anketa)
+
+
+@bot.message_handler(commands=['preza'])
+def send_preza(message):
+    fileid_of_preza = 'BQACAgIAAxkBAAIDyWBLf1rT6_rxHi0aWZU-JaqMd-uCAAJIDwACy2xYSnvirXKwBQebHgQ'
+    bot.send_document(message.chat.id, fileid_of_preza)
+
 
 
 def coop():
@@ -77,6 +102,8 @@ def welcome_func():
     markup.add(InlineKeyboardButton("Налогообложение", callback_data="menu1_taxes_cb"))
     markup.add(InlineKeyboardButton("Выдача посылок в ПВЗ", callback_data="menu1_takeout_cb"))
     markup.add(InlineKeyboardButton("Условия сотрудничества", callback_data="menu1_coop_cb2"))
+    markup.add(InlineKeyboardButton("Анкета для агентов", callback_data="menu1_anketa"),
+               InlineKeyboardButton("Презентация модели", callback_data="menu1_preza"))
     return markup
 
 
@@ -96,6 +123,11 @@ def callback_first_menu(call):
         bot.send_message(call.message.chat.id, da.nalog)
     elif call.data == "menu1_takeout_cb":
         bot.send_message(call.message.chat.id, da.takeout_from_PVZ)
+    elif call.data == "menu1_anketa":
+        bot.send_document(call.message.chat.id, fileid_of_anketa)
+        # bot.send_message(call.message.chat.id, send_anketa(call.message),)
+    elif call.data == "menu1_preza":
+        bot.send_document(call.message.chat.id, fileid_of_preza)
     elif call.data == "menu1_coop_cb2":
         bot.send_message(call.message.chat.id, 'Раздел: Условия сотрудничества', reply_markup=coop())
     else:
@@ -135,4 +167,4 @@ def function_name(message):
 
 print("бот запущен!")
 
-bot.polling()
+bot.polling(none_stop=True)
