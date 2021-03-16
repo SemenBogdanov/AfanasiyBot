@@ -57,9 +57,9 @@ def coop():
     markup.add(InlineKeyboardButton("2. Каким образом предоставляется скидка?", callback_data="menu2_cb_q_1"))
     markup.add(InlineKeyboardButton("3. По каким ценам продавать?", callback_data="menu2_cb_q_2"))
     markup.add(InlineKeyboardButton("4. Как согласовывать наших клиентов?", callback_data="menu2_cb_q_3"))
-    markup.add(InlineKeyboardButton("5. Когда будет выдача?", callback_data="menu2_cb_q_4"))
+    markup.add(InlineKeyboardButton("5. Когда будет реализована выдача?", callback_data="menu2_cb_q_4"))
     markup.add(InlineKeyboardButton("6. Весы, ОКВЭД - обязательные условия?", callback_data="menu2_cb_q_5"))
-    markup.add(InlineKeyboardButton("7. Вы предосте упаковку?", callback_data="menu2_cb_q_6"))
+    markup.add(InlineKeyboardButton("7. Вы предоставляете упаковку?", callback_data="menu2_cb_q_6"))
     markup.add(
         InlineKeyboardButton("8. Забираете отправления или их нужно носить на Почту?", callback_data="menu2_cb_q_7"))
     markup.add(InlineKeyboardButton("9. Как работать с претензиями?", callback_data="menu2_cb_q_8"))
@@ -96,12 +96,12 @@ def welcome_func():
     markup = InlineKeyboardMarkup()
     markup.row_width = 3
     markup.add(InlineKeyboardButton("Как стать партнером Почты России?", callback_data="menu1_partner_cb"))
+    markup.add(InlineKeyboardButton("Условия сотрудничества", callback_data="menu1_coop_cb2"))
     markup.add(InlineKeyboardButton("Настройка работы", callback_data="menu1_adj_cb"))
     markup.add(InlineKeyboardButton("Договорные отношения", callback_data="menu1_relation_with_agr"))
     markup.add(InlineKeyboardButton("Маркетинг и продвижение", callback_data="menu1_marketSMM_cb"))
     markup.add(InlineKeyboardButton("Налогообложение", callback_data="menu1_taxes_cb"))
     markup.add(InlineKeyboardButton("Выдача посылок в ПВЗ", callback_data="menu1_takeout_cb"))
-    markup.add(InlineKeyboardButton("Условия сотрудничества", callback_data="menu1_coop_cb2"))
     markup.add(InlineKeyboardButton("Анкета для агентов", callback_data="menu1_anketa"),
                InlineKeyboardButton("Презентация модели", callback_data="menu1_preza"))
     return markup
