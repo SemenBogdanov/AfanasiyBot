@@ -160,6 +160,7 @@ def function_name(message):
         else:
             r = random.randint(0, len(end_talk) - 1)
             bot.send_message(message.chat.id, end_talk[r])
+            bot.send_message(message.chat.id, "Если что, вот меню: ", reply_markup=welcome_func())
 
 
 # bot.send_message(message.chat.id, message.text)
